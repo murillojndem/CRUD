@@ -43,7 +43,6 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping(value ={"/{id}"})
-	@ResponseStatus(HttpStatus.GONE)
 	public void deletar(@PathVariable Long id) {
 		clienteRepository.deleteById(id);
 	}

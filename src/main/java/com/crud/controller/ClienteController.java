@@ -40,7 +40,6 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@ApiModelProperty(hidden = true)
 	public Cliente adicionar(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}

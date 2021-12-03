@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crud.model.Cliente;
 import com.crud.repository.ClienteRepository;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -38,6 +40,7 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiModelProperty(hidden = true)
 	public Cliente adicionar(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}

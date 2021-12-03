@@ -1,0 +1,73 @@
+Listagem de caminhos de pasta
+O n£mero de s‚rie do volume ‚ FC27-062B
+C:.
+|   .classpath
+|   .gitignore
+|   .project
+|   HELP.md
+|   mvnw
+|   mvnw.cmd
+|   pom.xml
+|   test.txt
+|   
++---.mvn
+|   \---wrapper
+|           maven-wrapper.jar
+|           maven-wrapper.properties
+|           MavenWrapperDownloader.java
+|           
++---.settings
+|       org.eclipse.core.resources.prefs
+|       org.eclipse.jdt.core.prefs
+|       org.eclipse.m2e.core.prefs
+|       org.springframework.ide.eclipse.prefs
+|       
++---src
+|   +---main
+|   |   +---java
+|   |   |   \---com
+|   |   |       \---crud
+|   |   |           |   CrudApplication.java
+|   |   |           |   
+|   |   |           +---controller
+|   |   |           |       ClienteController.java
+|   |   |           |       
+|   |   |           +---model
+|   |   |           |       Cliente.java
+|   |   |           |       
+|   |   |           \---repository
+|   |   |                   ClienteRepository.java
+|   |   |                   
+|   |   \---resources
+|   |       |   application.properties
+|   |       |   
+|   |       +---static
+|   |       \---templates
+|   \---test
+|       \---java
+|           \---com
+|               \---crud
+|                       CrudApplicationTests.java
+|                       
+\---target
+    +---classes
+    |   |   application.properties
+    |   |   
+    |   \---com
+    |       \---crud
+    |           |   CrudApplication.class
+    |           |   
+    |           +---controller
+    |           |       ClienteController.class
+    |           |       
+    |           +---model
+    |           |       Cliente.class
+    |           |       
+    |           \---repository
+    |                   ClienteRepository.class
+    |                   
+    \---test-classes
+        \---com
+            \---crud
+                    CrudApplicationTests.class
+                    

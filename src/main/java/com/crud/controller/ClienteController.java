@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crud.model.Cliente;
 import com.crud.repository.ClienteRepository;
 
-import io.swagger.annotations.ApiModelProperty;
-
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {

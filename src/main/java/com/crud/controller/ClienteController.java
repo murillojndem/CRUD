@@ -57,8 +57,7 @@ public class ClienteController {
 	
 	@PutMapping(value ={"/{id}"})
 	public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente) {
-		Cliente clienteAtualizado = clienteRepository.getById(id);
-		
+		Cliente clienteAtualizado = clienteRepository.getById(id);		
 		if(clienteAtualizado != null) {
 		clienteAtualizado.setNome(cliente.getNome());		
 		return clienteRepository.save(clienteAtualizado);

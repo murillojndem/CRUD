@@ -26,46 +26,47 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
-	
+
 	@GetMapping
-	public List <Cliente> listar() {
+	public List<Cliente> listar() {
 		return clienteRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	@ResponseBody
 	public Optional<Cliente> acharClientePorId(@PathVariable Long id) {
-		Optional<Cliente> cliente =  clienteRepository.findById(id);
-		if (cliente != null) {
-		return clienteRepository.findById(id);
-		} else {			
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		if (cliente.orElse(null) == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);			
+		} else {
+			return clienteRepository.findById(id);
 		}
-	}	
-	
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente adicionar(@RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 	
-	@DeleteMapping(value ={"/{id}"})
+	@DeleteMapping(value = { "/{id}" })
 	public void deletar(@PathVariable Long id) {
+		try {
 		clienteRepository.deleteById(id);
-	}
-	
-	@PutMapping(value ={"/{id}"})
-	public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente) {
-		Cliente clienteAtualizado = clienteRepository.getById(id);		
-		if(clienteAtualizado != null) {
-		clienteAtualizado.setNome(cliente.getNome());		
-		return clienteRepository.save(clienteAtualizado);
-		} else {
+		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	
-	
+
+	@PutMapping(value = { "/{id}" })
+	@ResponseBody
+	public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente) {		
+		try {
+			Cliente clienteAtualizado = clienteRepository.getById(id);
+			clienteAtualizado.setNome(cliente.getNome());
+			return clienteRepository.save(clienteAtualizado);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

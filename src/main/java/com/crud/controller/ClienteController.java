@@ -48,14 +48,14 @@ public class ClienteController {
 		return clienteRepository.save(cliente);
 	}
 	
-//	@DeleteMapping(value = { "/{id}" })
-//	public void deletar(@PathVariable Long id) {
-//		try {
-//		clienteRepository.deleteById(id);
-//		} catch (Exception e) {
-//			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-//		}
-//	}
+	@DeleteMapping(value = { "/{id}" })
+	public void deletar(@PathVariable Long id) {
+		try {
+		clienteRepository.deleteById(id);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@PutMapping(value = { "/{id}" })
 	@ResponseBody

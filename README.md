@@ -1,4 +1,4 @@
-Projeto de api de um CRUD realizado com o propósito de estudar o assunto.
+Projeto de api de um CRUD realizado com o propósito de estudar api REST com spring e Java.
 
 A documentação foi criada com swagger e pode ser encontrada no seguinte endereço: https://crud-time-integracao.herokuapp.com/swagger-ui/#/
 

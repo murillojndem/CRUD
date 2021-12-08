@@ -3,6 +3,8 @@ package com.crud.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.crud.model.Cliente;
 import com.crud.repository.ClienteRepository;
+import com.crud.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -26,6 +29,7 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	//private ClienteService clienteService;
 
 	@GetMapping
 	public List<Cliente> listar() {
@@ -44,8 +48,20 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+	public Cliente adicionar(@RequestBody Cliente cliente) {		
+		boolean validaCpf;
+		List<Cliente> listaDeClientes;
+		
+		listaDeClientes = clienteRepository.findAll();
+		validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
+		
+		if(validaCpf == true) {
+			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+		} else {
+			return clienteRepository.save(cliente);
+		}
+	
+//		return clienteRepository.save(cliente);
 	}
 	
 	@DeleteMapping(value = { "/{id}" })
@@ -59,7 +75,7 @@ public class ClienteController {
 
 	@PutMapping(value = { "/{id}" })
 	@ResponseBody
-	public Cliente update(@PathVariable Long id, @RequestBody Cliente cliente) {		
+	public Cliente update(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {		
 		try {
 			Cliente clienteAtualizado = clienteRepository.getById(id);
 			clienteAtualizado.setNome(cliente.getNome());

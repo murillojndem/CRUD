@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 
 
 @Data
 @Entity
 public class Cliente {
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -37,5 +41,9 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefone;
 	
+	@Getter
+	public Long getId_cliente() {
+		return id_cliente;
+	}
 	
 }

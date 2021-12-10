@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.crud.model.Cliente;
-import com.crud.model.Telefone;
 import com.crud.repository.ClienteRepository;
 import com.crud.service.ClienteService;
 
@@ -48,7 +47,7 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente, @RequestBody Telefone telefone) {		
+	public Cliente adicionar(@RequestBody Cliente cliente) {		
 		List<Cliente> listaDeClientes = clienteRepository.findAll();
 		boolean validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
 		if(validaCpf == true) {

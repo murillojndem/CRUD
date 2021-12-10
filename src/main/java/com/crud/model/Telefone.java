@@ -1,5 +1,7 @@
 package com.crud.model;
 
+import java.util.Optional;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Telefone {
 	@ManyToOne(targetEntity = Cliente.class, cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", insertable = false, updatable = false)
 	@ApiModelProperty(hidden = true)
-	private Cliente cliente;
+	private Optional<Cliente> cliente;
 	
 	private String telefone;
 	

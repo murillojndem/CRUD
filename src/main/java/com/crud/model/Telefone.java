@@ -22,8 +22,8 @@ public class Telefone {
 	@ApiModelProperty(hidden = true)
 	private Long id_telefone;	
 	
-	@ManyToOne(targetEntity = Cliente.class, cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", insertable = false, updatable = false)
+	@ManyToOne(targetEntity = Cliente.class, cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_cliente", nullable = false)
 	@ApiModelProperty(hidden = true)
 	private Optional<Cliente> cliente;
 	

@@ -26,6 +26,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@ApiModelProperty(hidden = true)
+	@Getter(value = AccessLevel.PUBLIC)
 	private Long id_cliente;
 	
 	@Column
@@ -40,10 +41,12 @@ public class Cliente {
 	@ApiModelProperty(hidden = true)
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefone;
-	
-	@Getter
-	public Long getId_cliente() {
-		return id_cliente;
+
+	@Override
+	public String toString() {
+		return "Cliente [id_cliente=" + id_cliente + ", nome=" + nome + ", CPF=" + CPF + ", dataDeNascimento="
+				+ dataDeNascimento + ", telefone=" + telefone + "]";
 	}
+	
 	
 }

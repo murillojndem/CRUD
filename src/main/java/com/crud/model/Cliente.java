@@ -1,6 +1,7 @@
 package com.crud.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +35,7 @@ public class Cliente {
 	
 	@ApiModelProperty(hidden = true)
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Telefone telefone;
+	private List<Telefone> telefone;
 	
 	
 }

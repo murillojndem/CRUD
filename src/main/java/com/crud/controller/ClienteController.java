@@ -51,7 +51,6 @@ public class ClienteController {
 	public Cliente adicionar(@RequestBody Cliente cliente, @RequestBody Telefone telefone) {		
 		List<Cliente> listaDeClientes = clienteRepository.findAll();
 		boolean validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
-		telefone.setTelefone(cliente.getTelefone());
 		if(validaCpf == true) {
 			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {

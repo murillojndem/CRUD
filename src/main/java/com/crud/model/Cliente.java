@@ -41,12 +41,6 @@ public class Cliente {
 	@ApiModelProperty(hidden = true)
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefone;
-
-	@Override
-	public String toString() {
-		return "Cliente [id_cliente=" + id_cliente + ", nome=" + nome + ", CPF=" + CPF + ", dataDeNascimento="
-				+ dataDeNascimento + ", telefone=" + telefone + "]";
-	}
 	
 	
 }

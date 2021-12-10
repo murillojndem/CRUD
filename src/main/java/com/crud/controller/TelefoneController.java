@@ -1,7 +1,5 @@
 package com.crud.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +27,7 @@ public class TelefoneController {
 	@PostMapping(value = { "/{id}" })
 	@ResponseStatus(HttpStatus.CREATED)
 	public Telefone adicionarTelefone(@PathVariable Long id, @RequestBody Telefone telefone) {		
-		Optional<Cliente> cliente = clienteRepository.findById(id);
+		Cliente cliente = clienteRepository.getById(id);
 		telefone.setCliente(cliente);
 		return telefoneRepository.save(telefone);
 	}

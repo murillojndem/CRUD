@@ -1,40 +1,33 @@
 package com.crud.model;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-
 @Data
 @Entity
-public class Cliente {
-
+public class Telefone {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@ApiModelProperty(hidden = true)
-	private Long id_cliente;
+	private Long id_telefone;	
 	
-	@Column
-	private String nome;
-	
-	//@CPF(message="cpf invalido")
-	@Column(nullable = false)
-	private String CPF;
-	
-	private Date dataDeNascimento;
-	
+	@ManyToOne(targetEntity = Cliente.class, cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", insertable = false, updatable = false)
 	@ApiModelProperty(hidden = true)
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Telefone telefone;
+	private Cliente cliente;
+	
+	private String telefone;
 	
 	
 }

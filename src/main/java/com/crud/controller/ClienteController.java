@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.crud.model.Cliente;
+import com.crud.model.Telefone;
 import com.crud.repository.ClienteRepository;
 import com.crud.service.ClienteService;
 
@@ -29,7 +30,6 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	//private ClienteService clienteService;
 
 	@GetMapping
 	public List<Cliente> listar() {
@@ -48,21 +48,17 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {		
-		boolean validaCpf;
-		List<Cliente> listaDeClientes;
-		
-		listaDeClientes = clienteRepository.findAll();
-		validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
-		
+	public Cliente adicionar(@RequestBody Cliente cliente, @RequestBody Telefone telefone) {		
+		List<Cliente> listaDeClientes = clienteRepository.findAll();
+		boolean validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
+		telefone.setTelefone(cliente.getTelefone());
 		if(validaCpf == true) {
 			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {
 			return clienteRepository.save(cliente);
 		}
-	
-//		return clienteRepository.save(cliente);
 	}
+	
 	
 	@DeleteMapping(value = { "/{id}" })
 	public void deletar(@PathVariable Long id) {

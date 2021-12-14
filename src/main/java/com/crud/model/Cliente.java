@@ -1,46 +1,31 @@
 package com.crud.model;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AccessLevel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
 public class Cliente {
 
-	
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@ApiModelProperty(hidden = true)
-	@Getter(value = AccessLevel.PUBLIC)
-	private Long id_cliente;
-	
-	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	private String nome;
-	
-	//@CPF(message="cpf invalido")
+
 	@Column(nullable = false)
 	private String CPF;
-	
-	private Date dataDeNascimento;
-	
-	@ApiModelProperty(hidden = true)
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Telefone> telefone;
-	
+
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+
+	@OneToMany(mappedBy = "cliente")
+	@JsonIgnore
+	private List<Telefone> telefones;
 	
 }

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.crud.controller.dto.ClienteDTO;
+import com.crud.controller.form.ClienteForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,50 +26,39 @@ import com.crud.repository.ClienteRepository;
 import com.crud.service.ClienteService;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteController {
 
 	@Autowired
-	private ClienteRepository clienteRepository;
-	//private ClienteService clienteService;
+	private ClienteService clienteService;
 
 	@GetMapping
 	public List<Cliente> listar() {
-		return clienteRepository.findAll();
+		return clienteService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Cliente> acharClientePorId(@PathVariable Long id) {
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if (cliente.orElse(null) == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);			
-		} else {
-			return clienteRepository.findById(id);
-		}
+	public Cliente acharClientePorId(@PathVariable Long id) {
+		return clienteService.findById(id);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {		
-		boolean validaCpf;
-		List<Cliente> listaDeClientes;
-		
-		listaDeClientes = clienteRepository.findAll();
-		validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, cliente);
-		
-		if(validaCpf == true) {
+	public ClienteDTO adicionar(@RequestBody ClienteForm clienteForm) {
+		List<Cliente> listaDeClientes = clienteService.findAll();
+		boolean validaCpf = ClienteService.validaCpfNoBanco(listaDeClientes, clienteForm);
+		if(validaCpf) {
 			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
-		} else {
-			return clienteRepository.save(cliente);
 		}
-	
-//		return clienteRepository.save(cliente);
+
+		return clienteService.save(clienteForm);
 	}
+	
 	
 	@DeleteMapping(value = { "/{id}" })
 	public void deletar(@PathVariable Long id) {
 		try {
-		clienteRepository.deleteById(id);
+			clienteService.deleteById(id);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
@@ -75,11 +66,9 @@ public class ClienteController {
 
 	@PutMapping(value = { "/{id}" })
 	@ResponseBody
-	public Cliente update(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {		
+	public ClienteDTO update(@PathVariable Long id, @Valid @RequestBody ClienteForm clienteForm) {
 		try {
-			Cliente clienteAtualizado = clienteRepository.getById(id);
-			clienteAtualizado.setNome(cliente.getNome());
-			return clienteRepository.save(clienteAtualizado);
+			return clienteService.update(id, clienteForm);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}

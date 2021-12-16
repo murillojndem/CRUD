@@ -42,8 +42,8 @@ class ClienteServiceTest {
 	@Test
 	final void whenFindByIdRetunClienteInstance() {
 		Mockito.when(clienteRepository
-			   .findById(Mockito.anyLong()))
-			   .thenReturn(Optional.of(cliente));
+		       .findById(Mockito.anyLong()))
+		       .thenReturn(Optional.of(cliente));
 		
 		Cliente response = clienteService.findById(ID);
 		

@@ -1,16 +1,15 @@
 package com.crud.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.crud.controller.dto.ClienteDTO;
-import com.crud.controller.form.ClienteForm;
-import com.crud.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crud.controller.dto.ClienteDTO;
+import com.crud.controller.form.ClienteForm;
 import com.crud.model.Cliente;
+import com.crud.repository.ClienteRepository;
 
 @Service
 public class ClienteService {

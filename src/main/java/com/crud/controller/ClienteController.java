@@ -1,12 +1,9 @@
 package com.crud.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.crud.controller.dto.ClienteDTO;
-import com.crud.controller.form.ClienteForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.crud.controller.dto.ClienteDTO;
+import com.crud.controller.form.ClienteForm;
 import com.crud.model.Cliente;
-import com.crud.repository.ClienteRepository;
 import com.crud.service.ClienteService;
 
 @RestController

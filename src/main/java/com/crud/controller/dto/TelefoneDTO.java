@@ -1,7 +1,5 @@
 package com.crud.controller.dto;
 
-import com.crud.model.Cliente;
-
 public class TelefoneDTO {
     private ClienteDTO cliente;
     private String telefone;
